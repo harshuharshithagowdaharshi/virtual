@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Classroom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .main-container {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .video-container {
+            flex: 3;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .video {
+            width: 80%;
+            height: 450px;
+            background-color: #000;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #f1f1f1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .sidebar button:hover {
+            background-color: #45a049;
+        }
+
+        .chat-container {
+            margin-top: 20px;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: #e9e9e9;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+        }
+
+        .chat-message {
+            background-color: #ddd;
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .chat-message.user {
+            background-color: #90EE90;
+            text-align: right;
+        }
+
+        .chat-message.teacher {
+            background-color: #ADD8E6;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Virtual Classroom</h1>
+</header>
+
+<div class="main-container">
+    <div class="video-container">
+        <div class="video">
+            <!-- Placeholder for video content (You can embed an actual video here later) -->
+            <p style="color: white; text-align: center;">Video will appear here</p>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <button onclick="startLecture()">Start Lecture</button>
+        <button onclick="stopLecture()">Stop Lecture</button>
+        <button onclick="toggleChat()">Toggle Chat</button>
+
+        <div class="chat-container" id="chatBox">
+            <!-- Chat messages will appear here -->
+        </div>
+
+        <input type="text" id="messageInput" class="chat-input" placeholder="Type a message..." onkeydown="sendMessage(event)">
+    </div>
+</div>
+
+<script>
+    // Function to start the lecture
+    function startLecture() {
+        alert("Lecture started");
+    }
+
+    // Function to stop the lecture
+    function stopLecture() {
+        alert("Lecture stopped");
+    }
+
+    // Function to toggle chat visibility
+    function toggleChat() {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Function to send messages
+    function sendMessage(event) {
+        const input = document.getElementById('messageInput');
+        const chatBox = document.getElementById('chatBox');
+
+        if (event.key === 'Enter' && input.value.trim() !== '') {
+            const messageText = input.value.trim();
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('chat-message', 'user');
+            userMessage.textContent = messageText;
+
+            chatBox.appendChild(userMessage);
+            input.value = '';
+
+            // Auto-scroll to the latest message
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+</script>
+
+</body>
+</html>
